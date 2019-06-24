@@ -1,0 +1,98 @@
+<div *ngIf="cryptos"  class="container-fluid">
+  <div class="row">
+    <div class="col-12 ">
+      <div *ngIf="!mobileView" class="logoContainer mx-auto mt-4">
+          <img src="../assets/images/logo.png" class="img-fluid logoImage center" alt="logo">
+      </div>
+      <div *ngIf="mobileView" class="logoContainer mt-4">
+        <img src="../assets/images/logo.png" class="img-fluid logoImage center" alt="logo">
+    </div>
+    </div>
+    <div class="col-12">
+
+        <hr /> 
+    </div>
+    
+  </div>
+</div>
+
+    <div class="panel  ">
+        <div class="subPanel  mx-auto">
+  
+            <form class="form-inline ">
+                <div class="text-center"  style="width: 30%">
+   
+                 <input type="text" 
+                 [(ngModel)]="inputValue" 
+                 name="inputValue"
+                 id="inputValue"
+                 (change)="onChangeValueInput($event)" 
+                 class="inputContainer form-control p-2" 
+                 style="width: 100%;" 
+                 />
+               </div>
+   
+               <div class="text-center" style="width: 15%">
+                 <select 
+                 (change)="onChangeCryptoInput($event)" 
+                 class="form-control cryptoSelect p-2"  
+                 style="width: 90%; ">
+                     <option *ngFor="let cryptoCoin of inputListCrypto" >
+                       {{ cryptoCoin }}
+                     </option>
+                   </select>
+               </div>
+               <div class="text-center " style="width: 10%;">
+                 <h1> = </h1>
+               </div>
+               
+                  <div class="text-center"  style="width: 30%">
+   
+                   <input type="text"  
+                   [(ngModel)]="outputValue" 
+                   id="outputValue"
+                   name="outputValue"
+                   (change)="onChangeValueOutput($event)" 
+                   class="inputContainer p-2 form-control" 
+                   ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01"
+                   style="width: 100%;" />
+                 </div>
+     
+                 <div class="cryptoSelectContainer text-center" style="width: 15%">
+                    <select 
+                     (change)="onChangeCryptoOutput($event)"
+                     class="form-control cryptoSelect p-2" 
+                     style="width: 90%; ">
+                     <option *ngFor="let crypto of outputListCrypto" >
+                         {{ crypto }}
+                     </option>
+                   </select> 
+                 </div>
+             </form>
+        </div>
+      </div>
+<footer class="footer mt-auto py-3">
+    <div class="container-fluid">
+        <div class="currencySelectContainer text-center">
+            <select 
+             class="form-control currencySelect cryptoSelect p-2" 
+             style="width: 100%; ">
+             <option *ngFor="let option of footerSelectorList">
+               {{option}}
+             </option>
+           </select> 
+         </div>
+      <hr />
+      <div *ngIf="cryptos" class="col-12">
+          <ul class="cryptoList">
+              <li *ngFor="let crypto of objectKeys(cryptos)">
+                <a  >
+                  <span class="left">{{ crypto }}<i class="fa fa-circle m-2" aria-hidden="true"></i> </span>
+                  <span class="right">{{ cryptos[crypto].USD | currency:'USD':true }}</span>
+                </a>
+              </li>
+            </ul>
+      </div>
+  
+    </div>
+  </footer>
